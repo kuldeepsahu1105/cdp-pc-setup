@@ -333,7 +333,7 @@ sleep 5
 ansible-playbook create_keycloak_client.yml --extra-vars \
          "keycloak__admin_username=admin \
           keycloak__admin_password=Cloudera123 \
-          keycloak__domain=http://$KEYCLOAK_SERVER_IP/auth \
+          keycloak__domain=http://$KEYCLOAK_SERVER_IP/ \
           keycloak__cdp_idp_name=$workshop_name \
           keycloak__realm=master \
           keycloak__auth_realm=master"
@@ -342,7 +342,7 @@ sleep 5
 ansible-playbook keycloak_hol_user_setup.yml --extra-vars \
    "keycloak__admin_username=admin \
     keycloak__admin_password=Cloudera123 \
-    keycloak__domain=http://$KEYCLOAK_SERVER_IP/auth \
+    keycloak__domain=http://$KEYCLOAK_SERVER_IP \
     hol_keycloak_realm=master \
     hol_session_name=$workshop_name-cdp-user-group \
     number_user_to_create=$number_of_workshop_users \
@@ -367,7 +367,7 @@ cd /userconfig/.$USER_NAMESPACE/keycloak_ansible_config
 ansible-playbook keycloak_hol_user_fetch.yml --extra-vars \
    "keycloak__admin_username=admin \
     keycloak__admin_password=Cloudera123 \
-    keycloak__domain=http://$KEYCLOAK_SERVER_IP/auth \
+    keycloak__domain=http://$KEYCLOAK_SERVER_IP \
     hol_keycloak_realm=master \
     hol_session_name=$workshop_name-cdp-user-group"
 sleep 5
@@ -379,10 +379,10 @@ echo "===============================================================" >> "/user
 echo "            Keycloak Details For $workshop_name HOL:           " >> "/userconfig/$workshop_name.txt"
 echo "===============================================================" >> "/userconfig/$workshop_name.txt"
 echo "Keycloak Server IP: $KEYCLOAK_SERVER_IP" >> "/userconfig/$workshop_name.txt"
-echo "Keycloak Admin URL: http://$KEYCLOAK_SERVER_IP/auth" >> "/userconfig/$workshop_name.txt"
+echo "Keycloak Admin URL: http://$KEYCLOAK_SERVER_IP" >> "/userconfig/$workshop_name.txt"
 echo "Keycloak Admin User: admin" >> "/userconfig/$workshop_name.txt"
 echo "Keycloak Admin Password: Cloudera123" >> "/userconfig/$workshop_name.txt"
-echo "Keycloak SSO URL: http://$KEYCLOAK_SERVER_IP/auth/realms/master/protocol/saml/clients/cdp-sso" >> "/userconfig/$workshop_name.txt"
+echo "Keycloak SSO URL: http://$KEYCLOAK_SERVER_IP/realms/master/protocol/saml/clients/cdp-sso" >> "/userconfig/$workshop_name.txt"
 echo "Numbers Of Users Created: $number_of_workshop_users" >> "/userconfig/$workshop_name.txt"
 echo "Sample Usernames: User1:$sample_keycloak_user1, User2:$sample_keycloak_user2" >> "/userconfig/$workshop_name.txt"
 echo "Default Password for HOL Users: $workshop_user_default_password " >> "/userconfig/$workshop_name.txt"
@@ -398,7 +398,7 @@ cd /userconfig/.$USER_NAMESPACE/keycloak_ansible_config
 ansible-playbook keycloak_hol_user_teardown.yml --extra-vars \
    "keycloak__admin_username=admin \
     keycloak__admin_password=Cloudera123 \
-    keycloak__domain=http://$KEYCLOAK_SERVER_IP/auth \
+    keycloak__domain=http://$KEYCLOAK_SERVER_IP \
     hol_keycloak_realm=master \
     hol_session_name=$workshop_name-cdp-user-group"
 sleep 10
